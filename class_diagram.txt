@@ -1,0 +1,152 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+top to bottom direction
+' ===== КЛАСИ =====
+class User {
+  - ід: int
+  - логін: String
+  - пароль: String
+  - повне_ім'я: String
+  - електронна_пошта: String
+  + авторизуватися(): bool
+  + вийти(): void
+  + оновити_профіль(): void
+  + змінити_пароль(): void
+  + переглянути_дані(): String
+}
+class Client {
+  - телефон: String
+  - дата_реєстрації: Date
+  - бонусні_бали: int
+  - чи_віп: bool
+  - нотатки: String
+  + створити_запис(): void
+  + скасувати_запис(): void
+  + переглянути_історію(): List
+  + переглянути_послуги(): List
+  + оновити_контакти(): void
+}
+class Employee {
+  - дата_найму: Date
+  - зарплата: float
+  - роки_стажу: int
+  - статус: bool
+  - посада: String
+  + отримати_стаж(): int
+  + змінити_статус(): void
+  + розрахувати_зарплату(): float
+  + отримати_графік(): List
+  + оновити_дані(): void
+}
+
+class Master {
+  - спеціалізація: String
+  - рейтинг: float
+  - макс_клієнтів_на_день: int
+  - портфоліо: String
+  - біографія: String
+  + переглянути_розклад(): void
+  + переглянути_записи(): List
+  + знайти_вільні_слоти(): List
+  + оновити_рейтинг(): void
+  + встановити_перерву(): void
+}
+class Administrator {
+  - рівень_доступу: int
+  - останній_вхід: DateTime
+  - ід_філіалу: int
+  - може_редагувати_послуги: bool
+  - оброблено_запитів: int
+  + підтвердити_запис(): void
+  + скасувати_запис(): void
+  + керувати_послугами(): void
+  + переглянути_клієнтів(): List
+  + сформувати_звіт(): void
+}
+class Service {
+  - ід: int
+  - назва: String
+  - опис: String
+  - ціна: float
+  - тривалість: int
+  + змінити_ціну(): void
+  + змінити_опис(): void
+  + активувати(): void
+  + архівувати(): void
+  + отримати_інформацію(): String
+}
+class Appointment {
+  - ід: int
+  - дата_час: DateTime
+  - статус: String
+  - ціна: float
+  - метод_оплати: String
+  + підтвердити(): void
+  + скасувати(): void
+  + перенести(): void
+  + розрахувати_ціну(): float
+  + отримати_статус(): String
+}
+class Schedule {
+  - ід: int
+  - ід_майстра: int
+  - робоча_дата: Date
+  - час_початку: Time
+  - час_завершення: Time
+  + додати_час(): void
+  + видалити_час(): void
+  + перевірити_доступність(): bool
+  + оновити(): void
+  + очистити(): void
+}
+class Notification {
+  - ід: int
+  - ід_користувача: int
+  - текст_повідомлення: String
+  - дата_час: DateTime
+  - чи_прочитано: bool
+  + надіслати(): void
+  + прочитати(): void
+  + видалити(): void
+  + позначити_прочитаним(): void
+  + переглянути(): String
+}
+class Report {
+  - ід: int
+  - початок_періоду: Date
+  - кінець_періоду: Date
+  - всього_записів: int
+  - загальний_дохід: float
+  + сформувати(): void
+  + експорт(): void
+  + переглянути(): String
+  + оновити(): void
+  + очистити(): void
+}
+' ===== ЛОГІЧНЕ ВИРІВНЮВАННЯ (Приховані зв'язки для структури) =====
+User -[hidden]down- Client
+Client -[hidden]down- Appointment
+Appointment -[hidden]down- Service
+Employee -[hidden]down- Master
+Master -[hidden]down- Schedule
+Administrator -[hidden]down- Report
+' ===== НАСЛІДУВАННЯ =====
+User <|-- Client : наслідує
+User <|-- Employee : наслідує
+Employee <|-- Master : наслідує
+Employee <|-- Administrator : наслідує
+Client "1" --> "0..*" Appointment : створює
+Master "1" --> "0..*" Appointment : обслуговує
+Appointment "1" --> "1" Service : включає
+' ===== ПОВІДОМЛЕННЯ =====
+User "1" --> "0..*" Notification : отримує
+' ===== РОЗКЛАД =====
+Master "1" *-- "1" Schedule : має
+' ===== АДМІНІСТРУВАННЯ =====
+Administrator o-- Service : керує 
+Administrator "1" --> "0..*" Appointment : керує
+' ===== ЗВІТИ =====
+Report ..> Appointment : генерується з
+Administrator ..> Report : формує
+@enduml
