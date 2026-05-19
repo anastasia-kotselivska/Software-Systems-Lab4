@@ -1,6 +1,6 @@
-<<<<<<< HEAD
+
 SOFTWARE-SYSTEMS-LAB5
-=======
+
 [![Python CI Application](https://github.com/anastasia-kotselivska/Software-Systems-Lab4/actions/workflows/python-app.yml/badge.svg)](https://github.com/anastasia-kotselivska/Software-Systems-Lab4/actions/workflows/python-app.yml)
 
 Проєкт демонструє налаштування процесів безперервної інтеграції (CI) та автоматичного контролю якості коду.
