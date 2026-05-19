@@ -1,4 +1,4 @@
-# !\[Python CI Application](https://github.com/anastasia-kotselivska/Software-Systems-Lab4/actions/workflows/python-app.yml/badge.svg)](https://github.com/anastasia-kotselivska/Software-Systems-Lab4/actions/workflows/python-app.yml)
+# !\[Python CI Application](https://github.com/anastasia-kotselivska/Software-Systems-Lab4/actions/workflows/python-app.yml/badge.svg)(https://github.com/anastasia-kotselivska/Software-Systems-Lab4/actions/workflows/python-app.yml)
 
 
 
